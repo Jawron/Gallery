@@ -22,16 +22,28 @@
             <div>
 
                 <?php
+//                $data = User::findAllUsers();
+//
+//                while($users = mysqli_fetch_array($data)){
+//                    echo "{$users['username']}<br>";
+//                }
+//
+//
+//                $user_by_id = User::findUserById(2);
+//
+//                $user = User::instatiation($user_by_id); // returns an array
+//
+//                echo $user->id;
 
-                $sql = "SELECT * FROM users WHERE id = 1";
-                $result = $database->query($sql);
+                $users = User::findUserById(1);
 
-                while($data = mysqli_fetch_assoc($result)){
-                    $username = $data['username'];
-                    echo "<h1>$username</h1>";
-                }
+//                foreach($users as $user){
+//                    echo $user->username . "<br>";
+//                }
+                echo $users->username;
 
-                ?>
+
+               ?>
 
 
                 </div>
