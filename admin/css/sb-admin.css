@@ -6,9 +6,11 @@
 
 /* Global Styles */
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 body {
     margin-top: 100px;
     background-color: #222;
+    font-family: 'Montserrat', sans-serif;
 }
 
 @media(min-width:768px) {
@@ -221,4 +223,13 @@ ul.alert-dropdown {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+
+.bg-danger{
+    padding:15px 25px;
+    color:white;
+    background-color:#e74c3c;
+    font-weight:300;
+    font-size: 16px;
+    box-shadow: 2px 2px #449d44;
 }

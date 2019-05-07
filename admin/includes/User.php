@@ -24,9 +24,6 @@ class User {
             return false;
         }
 
-
-        $found_user = mysqli_fetch_array($result);
-        return $found_user;
     }
 
     public static function findThisQuery($sql){
@@ -64,8 +61,28 @@ class User {
         $object_properties = get_object_vars($this);
 
         return array_key_exists($property,$object_properties);
+    }
 
 
+    public function verifyUser($username, $password){
+        global $database;
+
+        $username = $database->escapeString($username);
+        $password = $database->escapeString($password);
+
+        $sql = "SELECT * FROM users WHERE ";
+        $sql .= "username = '$username' ";
+        $sql .= "AND password = '$password' ";
+        $sql .= "LIMIT 1";
+
+        $result = self::findThisQuery("$sql");
+
+        if(!empty($result)){
+            $first_item = array_shift($result);
+            return $first_item;
+        } else {
+            return false;
+        }
 
     }
 

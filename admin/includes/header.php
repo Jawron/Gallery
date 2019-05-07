@@ -1,6 +1,18 @@
 <?php
 include("init.php");
 ob_start();
+
+//if(!$session->isSignedIn()) {
+ //   redirect("login.php");
+//}
+
+
+
+
+
+
+
+
 ?>
 
 
