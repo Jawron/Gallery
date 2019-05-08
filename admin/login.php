@@ -3,7 +3,7 @@ include("includes/header.php");
 require_once("includes/init.php");
 
 if($session->isSignedIn()){
-    redirect('index.php');
+   redirect('index.php');
 }
 
 if(isset($_POST['submit'])){
@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
         $session->login($user_found);
         redirect("index.php");
     } else {
-        $message = "Your password and username are incorect";
+        $message = "<h4 class=\"bg-danger\">Credentials Wrong!</h4>";
     }
 } else {
     $username = "";
@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
             <div class="row">
                 <div class="col-xs-8 col-md-offset-2">
                     <div class="well">
-                        <h4 class="bg-danger"><?php echo $message; ?></h4>
+                        <?php echo $message; ?>
                         <form id="loginForm" method="POST" action="" novalidate="novalidate">
                             <div class="form-group">
                                 <label for="username" class="control-label">Username</label>

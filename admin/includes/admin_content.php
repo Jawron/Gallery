@@ -35,12 +35,65 @@
 //
 //                echo $user->id;
 
-                $users = User::findUserById(1);
 
 //                foreach($users as $user){
 //                    echo $user->username . "<br>";
 //                }
-                echo $users->username;
+//                $display_users = User::findAllUsers();
+//
+//                foreach ($display_users as $users) {
+//                    echo "<tr>";
+//                    echo "<td> $users->id    </td>";
+//                    echo "<td> $users->username   </td>";
+//                    echo "</tr>";
+//                }
+                //                $user = User::findUserById(6);
+                //             $user->last_name = "Williams";
+
+                //             $user->delete();
+//
+//              $user = User::findUserById(7);
+//              $user->username = "Ultramegasuer";
+//               $user->save();
+
+//              $user = new User();
+//             $user->username = "sgfdeegteeggegegegesseggseges";
+//
+//               $user->save();
+ //echo $database->theInsertId();
+
+
+
+//                $user = new User();
+//
+//                $user->username = "Alexander the Great";
+//                $user->password = "legion";
+//                $user->first_name = "Alexandros2";
+//                $user->last_name = "Machedonian2";
+//
+//                $user->save();
+
+
+                $user = User::findUserById(16);
+
+                $user->username = "Alexander the Great";
+                $user->password = "legion";
+                $user->first_name = "Alexandros3";
+                $user->last_name = "Machedonian3";
+
+                $user->save();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                ?>

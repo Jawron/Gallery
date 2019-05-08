@@ -6,6 +6,7 @@ class Session {
     private $signed_in = false;
     public $user_id;
     public $message;
+    public $session_username;
 
     function __construct(){
         session_start();
@@ -48,6 +49,7 @@ class Session {
         if($user) {
             $this->user_id = $_SESSION['user_id'] = $user-id;
             $this->signed_in = true;
+            $this->session_username = $user-id;
         }
     }
 
@@ -56,6 +58,7 @@ class Session {
         unset($this->user_id);
         $this->signed_in = false;
     }
+
 
 
 }
