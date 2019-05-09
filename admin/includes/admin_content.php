@@ -63,31 +63,34 @@
  //echo $database->theInsertId();
 
 
-
-//                $user = new User();
 //
-//                $user->username = "Alexander the Great";
-//                $user->password = "legion";
-//                $user->first_name = "Alexandros2";
-//                $user->last_name = "Machedonian2";
+//               $user = new User();
 //
-//                $user->save();
+//              $user->username = "Alexander the Great";
+//               $user->password = "legion";
+//               $user->first_name = "Alexandros4";
+//               $user->last_name = "Machedonian4";
+//              $user->save();
+
+////
+//                $photos = new Photo();
+//
+//                $photos->photo_title = "Alexander the Great";
+//                $photos->photo_desc = "legion";
+//                $photos->filename = "Alexandros3";
+//                $photos->size = 3333;
+//
+//                $photos->save();
+
+//                    $photos = Photo::findAll();
+//
+//                foreach ($photos as $photo) {
+//                        echo $photo->photo_title."<br>";
+//                    }
 
 
-                $user = User::findUserById(16);
 
-                $user->username = "Alexander the Great";
-                $user->password = "legion";
-                $user->first_name = "Alexandros3";
-                $user->last_name = "Machedonian3";
-
-                $user->save();
-
-
-
-
-
-
+echo INCLUDES_PATH;
 
 
 
