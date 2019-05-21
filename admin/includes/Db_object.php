@@ -20,7 +20,7 @@ class Db_object {
     }
 
     public static function findById($id){
-        $result = static::findByQuery("SELECT * FROM " .static::$db_table . " WHERE id = $id LIMIT 1");
+        $result = static::findByQuery("SELECT * FROM " .static::$db_table . " WHERE id = $id ");
 
         if(!empty($result)){
             $first_item = array_shift($result);
@@ -42,6 +42,13 @@ class Db_object {
         }
 
         return $the_object_array;
+    }
+
+    private function hasTheAtribute($property){
+
+        $object_properties = get_object_vars($this);
+
+        return array_key_exists($property,$object_properties);
     }
 
     public static function instatiation($record){
@@ -66,12 +73,7 @@ class Db_object {
         return $object;
     }
 
-    private function hasTheAtribute($property){
 
-        $object_properties = get_object_vars($this);
-
-        return array_key_exists($property,$object_properties);
-    }
 
     protected function properties() {
         //return get_object_vars($this);
@@ -108,7 +110,7 @@ class Db_object {
         $properties = $this->cleanProperties();
 
         $sql = "INSERT INTO " .static::$db_table." (". implode(',', array_keys($properties))  .") ";
-        $sql .= "VALUES ('". implode("','", array_values($properties))  ."')";
+        $sql .= " VALUES ('". implode("\',\'", array_values($properties))  ."')";
 
         if($database->query($sql)){
             $this->id = $database->theInsertId();
