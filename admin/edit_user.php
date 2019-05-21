@@ -42,11 +42,6 @@ if(isset($_POST['submit'])) {
 
 
 
-
-
-
-
-
 ?>
 
 <!-- Navigation -->
@@ -99,6 +94,9 @@ if(isset($_POST['submit'])) {
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Update the Motherfucker" name="submit" class="btn btn-primary pull-right" >
+                        </div>
+                        <div class="form-group">
+                            <a href="delete_user.php?id=<?php echo $display_users->id;?>" class="btn btn-danger">Delete the Motherfucker</a>
                         </div>
 
                     </div>

@@ -143,7 +143,7 @@ class Db_object {
 
     public function delete(){
         global $database;
-        $sql = "DELETE FROM " .static::$db_table." WHERE id = {$database->escapeString($this->id)} LIMIT 1";
+        $sql = "DELETE FROM " . static::$db_table ." WHERE id = {$database->escapeString($this->id)} LIMIT 1";
 
 
         $database->query($sql);

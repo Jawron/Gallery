@@ -10,6 +10,7 @@ class User extends Db_object {
     public $password;
     public $first_name;
     public $last_name;
+    public $tmp_path;
     public $errors = [];
     public $upload_directory = "images";
     public $image_placeholder = "https://via.placeholder.com/100&text=image";
@@ -18,7 +19,6 @@ class User extends Db_object {
     public function imagePlaceholder(){
         return empty($this->user_image) ? $this->image_placeholder : $this->upload_directory.DS.$this->user_image;
     }
-
     public function delete_user(){
         if($this->delete()){
             $target_path = SITE_ROOT.DS.'admin'.DS.$this->imagePlaceholder();
@@ -52,12 +52,11 @@ class User extends Db_object {
     }
 
 
-    public function saveUserAndImage(){
+    public function saveImage(){
 
             if(!empty($this->errors)){
                 echo "retun false";
                 return false;
-                echo $this->errors;
             }
 
             if(empty($this->user_image) || empty($this->tmp_path)){
@@ -73,10 +72,10 @@ class User extends Db_object {
             }
 
             if(move_uploaded_file($this->tmp_path,$target_path)){
-                if($this->create()) {
+
                     unset($this->tmp_path);
                     return true;
-                }
+
             } else {
                 $this->errors[] = "The folder directory dosen't  have permissions or dosen't exists";
                 return false;
