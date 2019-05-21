@@ -52,25 +52,22 @@
 
                 //             $user->delete();
 //
-//              $user = User::findUserById(7);
-//              $user->username = "Ultramegasuer";
-//               $user->save();
-
-//              $user = new User();
-//             $user->username = "sgfdeegteeggegegegesseggseges";
+//              $user = Photo::findById(10);
+//              echo $user->filename;
 //
 //               $user->save();
  //echo $database->theInsertId();
 
 
-//
+////
 //               $user = new User();
 //
-//              $user->username = "Alexander the Great";
+//              $user->username = "test with image";
 //               $user->password = "legion";
+//               $user->user_image = "banner-01.png";
 //               $user->first_name = "Alexandros4";
 //               $user->last_name = "Machedonian4";
-//              $user->save();
+//               $user->create();
 
 ////
 //                $photos = new Photo();
@@ -89,8 +86,8 @@
 //                    }
 
 
-
-echo INCLUDES_PATH;
+//
+//echo INCLUDES_PATH;
 
 
 

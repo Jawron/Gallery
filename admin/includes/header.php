@@ -34,7 +34,7 @@ ob_start();
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-
+    <link href="css/style.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -45,8 +45,9 @@ ob_start();
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
-
+    <!-- HEADER -->
     <div id="wrapper">

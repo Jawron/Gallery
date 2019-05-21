@@ -1,4 +1,26 @@
 <?php include("includes/header.php"); ?>
+<?php
+if(!$session->isSignedIn()) {
+    redirect("login.php");
+}
+?>
+
+<?php
+$message = '';
+if(isset($_POST['submit'])){
+    $photo = new Photo();
+    $photo->photo_title = $_POST['photo_title'];
+    $photo->setFile($_FILES['file_upload']);
+
+    if($photo->save()) {
+        $message = "Photo was uploaded succesfull". $_FILES['file_upload']['name'];
+    } else {
+        $message = join("<br>", $photo->errors);
+    }
+}
+
+?>
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -18,14 +40,21 @@
                     Upload
                     <small>Subheading</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-file"></i> Blank Page
-                    </li>
-                </ol>
+                <div class="col-md-6 ">
+                    <?php echo $message; ?>
+                    <?php// echo SITE_ROOT . DS . 'admin' . DS . 'images' . DS ;?>
+
+                    <form method="post" enctype="multipart/form-data" action="upload.php">
+                        <div class="form-group">
+                            <input type="text" name="photo_title" class="form-control">
+                        </div>
+                      <div class="form-group">
+                           <input type="file" name="file_upload"  class="form-control">
+                       </div>
+                        <input type="submit" name="submit" value="Upload" class="btn btn-success">
+                    </form>
+                </div>
+
             </div>
         </div>
         <!-- /.row -->

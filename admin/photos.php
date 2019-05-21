@@ -1,5 +1,9 @@
 <?php include("includes/header.php"); ?>
-
+<?php
+if(!$session->isSignedIn()) {
+    redirect("login.php");
+}
+?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,7 +12,6 @@
     <?php include("includes/side_nav.php"); ?>
     <!-- /.navbar-collapse -->
 </nav>
-
 <div id="page-wrapper">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -18,14 +21,55 @@
                     Photos
                     <small>Subheading</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-file"></i> Blank Page
-                    </li>
-                </ol>
+                <div class="col-md-12">
+                    <?php
+
+                    $photo = new Photo();
+                    $photo_data = $photo->findAll();
+                    ?>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Id</th>
+                                <th>File Name</th>
+                                <th>Title</th>
+                                <th>Size</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php foreach ($photo_data as $data){ ?>
+                        <tr>
+                            <td>
+                                <img class="admin-photo-thumbnail" src="<?php echo $photo->picturePath($data->filename); ?>">
+                                <div class="pictures_link">
+                                    <a href="delete_photo.php?id=<?php echo $data->id;?>">Delete</a>
+                                    <a href="edit_photo.php?id=<?php echo $data->id;?>">Edit</a>
+                                    <a href="">View</a>
+                                </div>
+                            </td>
+                            <td><?php echo $data->id; ?></td>
+                            <td><?php echo $data->filename; ?></td>
+                            <td><?php echo $data->photo_title; ?></td>
+                            <td><?php echo $data->size/1000000; ?> MB</td>
+                            <td><?php echo $data->type; ?></td>
+                        </tr>
+                        <?php } ?>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+
+
+
+
             </div>
         </div>
         <!-- /.row -->
