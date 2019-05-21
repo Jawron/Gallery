@@ -9,7 +9,7 @@ require_once("admin/includes/init.php");
 
 $photo = Photo::findById($_GET['id']);
 
-
+     
 if(isset($_POST['submit'])){
 
     $author = trim($_POST['author']);
