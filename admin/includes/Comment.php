@@ -31,7 +31,7 @@ class Comment extends Db_object {
         global $database;
 
 
-        $sql = "SELECT * FROM ". self::$db_table ." ";
+        $sql = "SELECT * FROM ". self::$db_table ;
         $sql .= " WHERE photo_id = ".$database->escapeString($photo_id);
         $sql .= " ORDER BY photo_id ASC";
 

@@ -20,70 +20,84 @@ class Db_object {
     }
 
     public static function findById($id){
-        $result = static::findByQuery("SELECT * FROM " .static::$db_table . " WHERE id = $id ");
+        global $database;
+        $the_result_array = static::findByQuery("SELECT * FROM " . static::$db_table . " WHERE id = $id LIMIT 1");
 
-        if(!empty($result)){
-            $first_item = array_shift($result);
-            return $first_item;
-        } else {
-            return false;
-        }
+        return !empty($the_result_array) ? array_shift($the_result_array) : false;
 
     }
 
 
     public static function findByQuery($sql){
         global $database;
+        $result_set = $database->query($sql);
+        $the_object_array = array();
+        while($row = mysqli_fetch_array($result_set)) {
 
-        $result = $database->query($sql);
-        $the_object_array = [];
-        while($row = mysqli_fetch_array($result)){
-            $the_object_array[] = static::instatiation($row);
+            $the_object_array[] = static::initiation($row);
+
         }
 
         return $the_object_array;
+
     }
+
+
+
+
+    public static function initiation($record){
+        //gets the class called
+        //and loops thru the attributes and assigns values
+        //after that return an array with attributes as keys and values as values  (associative array)
+
+        $calling_class = get_called_class();
+
+
+        $the_object = new $calling_class;
+
+
+        foreach ($record as $the_attribute => $value) {
+
+            if($the_object->hasTheAtribute($the_attribute)) {
+
+                $the_object->$the_attribute = $value;
+
+
+            }
+
+
+        }
+
+
+
+        return $the_object;
+    }
+
 
     private function hasTheAtribute($property){
 
-        $object_properties = get_object_vars($this);
+        // $object_properties = get_object_vars($this);
 
-        return array_key_exists($property,$object_properties);
+        // return array_key_exists($the_attribute, $object_properties);
+
+        return property_exists($this, $property);
     }
-
-    public static function instatiation($record){
-
-        $calling_class= get_called_class();
-
-        $object = new $calling_class;//instead of calling the db_object class will call the
-        // Users class because the Users class is calling this function by extending it
-
-//        $object->id         = $user_by_id['id'];
-//        $object->username   = $user_by_id['username'];
-//        $object->password   = $user_by_id['password'];
-//        $object->first_name = $user_by_id['first_name'];
-//        $object->last_name  = $user_by_id['last_name'];
-
-        foreach ($record as $property => $value){
-            if($object->hasTheAtribute($property)){
-                $object->$property = $value;
-            }
-        }
-
-        return $object;
-    }
-
 
 
     protected function properties() {
         //return get_object_vars($this);
-        $properties = [];
+        $properties = array();
 
-        foreach (static::$db_table_fields as $db_field){
-            if(property_exists($this,$db_field)) {
+        foreach (static::$db_table_fields  as $db_field) {
+
+            if(property_exists($this, $db_field)) {
+
                 $properties[$db_field] = $this->$db_field;
+
             }
+
         }
+
         return $properties;
 
     }
@@ -91,12 +105,19 @@ class Db_object {
     protected function cleanProperties(){
         global $database;
 
-        $clean_properties = [];
 
-        foreach ($this->properties() as $key => $value){
+        $clean_properties = array();
+
+
+        foreach ($this->properties() as $key => $value) {
+
             $clean_properties[$key] = $database->escapeString($value);
+
+
         }
-        return $clean_properties;
+
+        return $clean_properties ;
+
     }
 
 
@@ -109,15 +130,23 @@ class Db_object {
 
         $properties = $this->cleanProperties();
 
-        $sql = "INSERT INTO " .static::$db_table." (". implode(',', array_keys($properties))  .") ";
-        $sql .= " VALUES ('". implode("\',\'", array_values($properties))  ."')";
+        $sql = "INSERT INTO " . static::$db_table . "(" . implode(",", array_keys($properties)) . ")";
+        $sql .= "VALUES ('". implode("','", array_values($properties)) ."')";
 
-        if($database->query($sql)){
+
+        if($database->query($sql)) {
+
             $this->id = $database->theInsertId();
+
             return true;
+
         } else {
+
             return false;
+
+
         }
+
 
     }
 
@@ -170,6 +199,17 @@ class Db_object {
             $this->size = $file['size'];
 
         }
+
+    }
+
+    public static function countAll() {
+        global $database;
+
+        $sql = "SELECT COUNT(*) FROM " . static::$db_table;
+        $result = $database->query($sql);
+        $row = mysqli_fetch_array($result);
+
+        return array_shift($row);
 
     }
 }

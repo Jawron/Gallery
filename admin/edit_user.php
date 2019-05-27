@@ -8,13 +8,12 @@ if(!$session->isSignedIn()) {
 
 
 if(empty($_GET['id'])){
-    redirect('photos.php');
+    redirect('users.php');
 }
-$display_users = User::findById($_GET['id']);
+$user = User::findById($_GET['id']);
 
-$user = new User();
 
-if(isset($_POST['submit'])) {
+if(isset($_POST['update'])) {
     if ($user) {
         $user->username = $_POST['username'];
         $user->password = $_POST['password'];
@@ -23,12 +22,15 @@ if(isset($_POST['submit'])) {
 
         if(empty($_FILES['file_upload'])){
             $user->save();
+            redirect("users.php");
+            $session->message("The user has been updated");
         } else {
 
             $user->setFile($_FILES['file_upload']);
 
-            $user->saveUserAndImage();
+            $user->saveImage();
             $user->save();
+            $session->message("The user has been updated");
 
             redirect('edit_user.php?id='.$user->id);
         }
@@ -58,16 +60,16 @@ if(isset($_POST['submit'])) {
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Add USer
+                    Edit USer
                     <small>Subheading</small>
                 </h1>
 
                 <div class="col-md-6">
-                    <img class="img-responsive" src="<?php echo $display_users->upload_directory.DS.$display_users->user_image;?>">
+                    <a href="" data-toggle="modal" data-target="photo_library"><img class="img-responsive" src="<?php echo $user->upload_directory.DS.$user->user_image;?>"></a>
                 </div>
 
 
-                <?php echo $display_users->id; ?>
+                <?php echo $user->id; ?>
                 <form action="" enctype="multipart/form-data" method="post">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -77,26 +79,26 @@ if(isset($_POST['submit'])) {
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                           <input type="text" name="username" class="form-control" value="<?php echo $display_users->username;?>">
+                           <input type="text" name="username" class="form-control" value="<?php echo $user->username;?>">
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" value="<?php echo $display_users->password;?>">
+                            <input type="password" name="password" class="form-control" value="<?php echo $user->password;?>">
                         </div>
                         <div class="form-group">
                             <label for="first_name">First name</label>
-                            <input type="text" name="first_name" class="form-control" value="<?php echo $display_users->first_name;?>">
+                            <input type="text" name="first_name" class="form-control" value="<?php echo $user->first_name;?>">
                         </div>
                         <div class="form-group">
                             <label for="last_name">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" value="<?php echo $display_users->last_name;?>">
+                            <input type="text" name="last_name" class="form-control" value="<?php echo $user->last_name;?>">
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Update the Motherfucker" name="submit" class="btn btn-primary pull-right" >
+                            <input type="submit" value="Update the Motherfucker" name="update" class="btn btn-primary pull-right" >
                         </div>
                         <div class="form-group">
-                            <a href="delete_user.php?id=<?php echo $display_users->id;?>" class="btn btn-danger">Delete the Motherfucker</a>
+                            <a href="delete_user.php?id=<?php echo $user->id;?>" class="btn btn-danger">Delete the Motherfucker</a>
                         </div>
 
                     </div>

@@ -233,3 +233,7 @@ ul.alert-dropdown {
     font-size: 16px;
     box-shadow: 2px 2px #449d44;
 }
+
+.pager li .active {
+    background-color: #2e6da4;
+}

@@ -11,95 +11,112 @@
                 Admin
                 <small>Subheading</small>
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                </li>
-                <li class="active">
-                    <i class="fa fa-file"></i> Blank Page
-                </li>
-            </ol>
-            <div>
 
-                <?php
-//                $data = User::findAllUsers();
-//
-//                while($users = mysqli_fetch_array($data)){
-//                    echo "{$users['username']}<br>";
-//                }
-//
-//
-//                $user_by_id = User::findUserById(2);
-//
-//                $user = User::instatiation($user_by_id); // returns an array
-//
-//                echo $user->id;
-
-
-//                foreach($users as $user){
-//                    echo $user->username . "<br>";
-//                }
-//                $display_users = User::findAllUsers();
-//
-//                foreach ($display_users as $users) {
-//                    echo "<tr>";
-//                    echo "<td> $users->id    </td>";
-//                    echo "<td> $users->username   </td>";
-//                    echo "</tr>";
-//                }
-                //                $user = User::findUserById(6);
-                //             $user->last_name = "Williams";
-
-                //             $user->delete();
-//
-//              $user = Photo::findById(10);
-//              echo $user->filename;
-//
-//               $user->save();
- //echo $database->theInsertId();
-
-
-////
-//               $user = new User();
-//
-//              $user->username = "test with image";
-//               $user->password = "legion";
-//               $user->user_image = "banner-01.png";
-//               $user->first_name = "Alexandros4";
-//               $user->last_name = "Machedonian4";
-//               $user->create();
-
-////
-//                $photos = new Photo();
-//
-//                $photos->photo_title = "Alexander the Great";
-//                $photos->photo_desc = "legion";
-//                $photos->filename = "Alexandros3";
-//                $photos->size = 3333;
-//
-//                $photos->save();
-
-//                    $photos = Photo::findAll();
-//
-//                foreach ($photos as $photo) {
-//                        echo $photo->photo_title."<br>";
-//                    }
-
-
-//
-//echo INCLUDES_PATH;
-
-
-
-
-
-
-
-
-               ?>
-
-
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary" style="border-color: #d24d57">
+                        <div class="panel-heading" style="background-color: #d24d57">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $session->count;?></div>
+                                    <div>New Views</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <!--<div>Page View from Gallery</div>-->
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green" style="border-color: #9f5afd">
+                        <div class="panel-heading" style="background-color: #9f5afd">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-photo fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo Photo::countAll();?></div>
+                                    <div>Photos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Total Photos in Gallery</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow" style="border-color: #2c3e50">
+                        <div class="panel-heading" style="background-color: #2c3e50">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo User::countAll();?></div>
+
+                                    <div>Users</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Total Users</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red" style="border-color:#1e824c">
+                        <div class="panel-heading" style="background-color: #1e824c">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo Comment::countAll();?></div>
+                                    <div>Comments</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Total Comments</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div id="piechart" style="width: 900px; height: 500px;"></div>
+            </div>
+
+            <!--First Row-->
         </div>
     </div>
     <!-- /.row -->

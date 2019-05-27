@@ -37,6 +37,7 @@ if(!$session->isSignedIn()) {
                                 <th>Title</th>
                                 <th>Size</th>
                                 <th>Type</th>
+                                <th>Comments</th>
                             </tr>
                         </thead>
 
@@ -48,7 +49,7 @@ if(!$session->isSignedIn()) {
                                 <div class="pictures_link">
                                     <a href="delete_photo.php?id=<?php echo $data->id;?>">Delete</a>
                                     <a href="edit_photo.php?id=<?php echo $data->id;?>">Edit</a>
-                                    <a href="">View</a>
+                                    <a href="../photo.php?id=<?php echo $data->id;?>">View</a>
                                 </div>
                             </td>
                             <td><?php echo $data->id; ?></td>
@@ -56,6 +57,12 @@ if(!$session->isSignedIn()) {
                             <td><?php echo $data->photo_title; ?></td>
                             <td><?php echo $data->size/1000000; ?> MB</td>
                             <td><?php echo $data->type; ?></td>
+                            <td><?php
+                                $comment = Comment::findComments($data->id);
+                                echo count($comment);
+                                ?>
+                                 <a href="photo_comment.php?id=<?php echo $data->id;?>"> View Comments</a>
+                            </td>
                         </tr>
                         <?php } ?>
                         </tbody>

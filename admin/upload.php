@@ -7,9 +7,12 @@ if(!$session->isSignedIn()) {
 
 <?php
 $message = '';
-if(isset($_POST['submit'])){
+if(isset($_FILES['file_upload'])){
     $photo = new Photo();
     $photo->photo_title = $_POST['photo_title'];
+    $photo->caption = $_POST['caption'];
+    $photo->alt_text = $_POST['alt_text'];
+    $photo->photo_desc = $_POST['description'];
     $photo->setFile($_FILES['file_upload']);
 
     if($photo->save()) {
@@ -40,17 +43,31 @@ if(isset($_POST['submit'])){
                     Upload
                     <small>Subheading</small>
                 </h1>
-                <div class="col-md-6 ">
+                <div class="col-md-7 col-md-offset-2 ">
                     <?php echo $message; ?>
-                    <?php// echo SITE_ROOT . DS . 'admin' . DS . 'images' . DS ;?>
-
+                    <?php echo SITE_ROOT . DS . 'admin' . DS . 'images' . DS ;?>
                     <form method="post" enctype="multipart/form-data" action="upload.php">
                         <div class="form-group">
+                            <label for="photo_title">Photo Title</label>
                             <input type="text" name="photo_title" class="form-control">
                         </div>
-                      <div class="form-group">
+                        <div class="form-group">
+                            <label for="caption">Caption</label>
+                            <input type="text" name="caption" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="alt_text">SEO alt text</label>
+                            <input type="text" name="alt_text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="file_upload">Photo file</label>
                            <input type="file" name="file_upload"  class="form-control">
-                       </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+
+                        </div>
                         <input type="submit" name="submit" value="Upload" class="btn btn-success">
                     </form>
                 </div>

@@ -15,7 +15,9 @@ if(isset($_POST['submit'])){
 
         $user->setFile($_FILES['file_upload']);
 
-        $user->saveUserAndImage();
+        $user->saveImage();
+        $user->save();
+        redirect("users.php");
 
     }
 
