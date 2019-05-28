@@ -7,13 +7,13 @@ if(!$session->isSignedIn()) {
 
 <?php
 $message = '';
-if(isset($_FILES['file_upload'])){
+if(isset($_FILES['file'])){
     $photo = new Photo();
     $photo->photo_title = $_POST['photo_title'];
     $photo->caption = $_POST['caption'];
     $photo->alt_text = $_POST['alt_text'];
     $photo->photo_desc = $_POST['description'];
-    $photo->setFile($_FILES['file_upload']);
+    $photo->setFile($_FILES['file']);
 
     if($photo->save()) {
         $message = "Photo was uploaded succesfull". $_FILES['file_upload']['name'];
@@ -61,7 +61,7 @@ if(isset($_FILES['file_upload'])){
                         </div>
                         <div class="form-group">
                             <label for="file_upload">Photo file</label>
-                           <input type="file" name="file_upload"  class="form-control">
+                           <input type="file" name="file"  class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
@@ -75,6 +75,14 @@ if(isset($_FILES['file_upload'])){
             </div>
         </div>
         <!-- /.row -->
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-lg-7 col-md-offset-2">
+                <form action="upload.php" class="dropzone"></form>
+            </div>
+        </div>
+        <br><br><br><br>
     </div>
     <!-- /.container-fluid -->
 </div>

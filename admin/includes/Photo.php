@@ -105,6 +105,15 @@ class Photo extends Db_object {
         }
     }
 
+    public static function showUserImageData($photo_id){
+        $photo = Photo::findById($photo_id);
+
+        $output = "<a class='thumbnail' href=''><img width='100' src='".$photo->picturePath($photo->filename)."'></a>";
+        $output .= "<p>{$photo->filename}</p>";
+
+        echo $output;
+    }
+
 
 
 

@@ -17,6 +17,7 @@ if(isset($_POST['submit'])){
 
         $user->saveImage();
         $user->save();
+        $session->message("The username : {$user->username} has been created");
         redirect("users.php");
 
     }

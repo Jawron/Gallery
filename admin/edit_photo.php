@@ -7,7 +7,7 @@ if(!$session->isSignedIn()) {
 
 
 if(empty($_GET['id'])){
-    redirect('photos.php');
+    redirect('photos.php?999');
 } else {
     $photo = Photo::findById($_GET['id']);
 
@@ -18,7 +18,14 @@ if(empty($_GET['id'])){
            $photo->caption = $_POST['caption'];
            $photo->alt_text = $_POST['alt_text'];
            $photo->photo_desc = $_POST['description'];
+
+            $photo->save();
+            $session->message("The photo has been edited with success");
+
+        } else {
+            echo "not saved";
         }
+
 
     }
 
@@ -45,7 +52,8 @@ if(empty($_GET['id'])){
                     Edit Photos
                     <small>Subheading</small>
                 </h1>
-                <form action="edit_photo.php" enctype="multipart/form-data" method="post">
+                <?php echo $_GET['id'];?>
+                <form action="edit_photo.php"  method="post">
                     <div class="col-md-8">
                         <div class="form-group">
                            <input type="text" name="title" class="form-control" value="<?php echo $photo->photo_title; ?>">

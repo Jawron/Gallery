@@ -24,7 +24,6 @@ class Db_object {
         $the_result_array = static::findByQuery("SELECT * FROM " . static::$db_table . " WHERE id = $id LIMIT 1");
 
         return !empty($the_result_array) ? array_shift($the_result_array) : false;
-
     }
 
 
@@ -153,23 +152,22 @@ class Db_object {
     public function update(){
         global $database;
 
+        $properties = $this->clean_properties();
+        unset($properties['id']);
 
-
-        $properties = $this->cleanProperties();
-
-        $properties_pairs = [];
-
-        foreach ($properties as $key => $value) {
-            $properties_pairs[] = "{$key} = '{$value}' ";
+        foreach ($properties as $key => $val) {
+            $properties_pairs[] = "{$key}='{$val}'";
         }
 
-        $sql = "UPDATE " .static::$db_table." SET ";
-        $sql .= implode(', ', $properties_pairs);
-        $sql .= " WHERE id = {$database->escapeString($this->id)} ";
+
+        $sql = "UPDATE " . static::$db_table . " SET ";
+        $sql .= implode(",", $properties_pairs);
+        $sql .= " WHERE id = " . $database->escape_string($this->id);
 
         $database->query($sql);
 
-        return (mysqli_affected_rows($database->connection) == 1) ? true : false ;
+        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
+        //the method confirms if some changes were made in the database row and returns true(1)
     }
 
     public function delete(){

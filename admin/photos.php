@@ -21,6 +21,7 @@ if(!$session->isSignedIn()) {
                     Photos
                     <small>Subheading</small>
                 </h1>
+                <p class="alert-success"><?php echo $message;?></p>
                 <div class="col-md-12">
                     <?php
 

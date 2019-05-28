@@ -1,11 +1,11 @@
 <?php
 include("init.php");
 ob_start();
-
-if(!$session->isSignedIn()) {
-    redirect("login.php");
-}
-
+//
+//if(!$session->isSignedIn()) {
+//    redirect("login.php");
+//}
+//
 
 
 
@@ -31,6 +31,7 @@ if(!$session->isSignedIn()) {
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dropzone.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
@@ -44,8 +45,11 @@ if(!$session->isSignedIn()) {
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
+
     <![endif]-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/js.js" defer></script>
+    <script src="js/dropzone.js" defer></script>
 
 
 </head>

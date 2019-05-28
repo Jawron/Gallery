@@ -1,4 +1,5 @@
 <?php include("includes/header.php"); ?>
+<?php include("includes/photo_lib_modal.php"); ?>
 <?php
 if(!$session->isSignedIn()) {
     redirect("login.php");
@@ -32,7 +33,8 @@ if(isset($_POST['update'])) {
             $user->save();
             $session->message("The user has been updated");
 
-            redirect('edit_user.php?id='.$user->id);
+            //redirect('edit_user.php?id='.$user->id);
+            redirect('users.php');
         }
 
         }
@@ -60,12 +62,12 @@ if(isset($_POST['update'])) {
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Edit USer
+                    <span class="test">Edit User</span>
                     <small>Subheading</small>
                 </h1>
 
-                <div class="col-md-6">
-                    <a href="" data-toggle="modal" data-target="photo_library"><img class="img-responsive" src="<?php echo $user->upload_directory.DS.$user->user_image;?>"></a>
+                <div class="col-md-6 user_image_box">
+                    <a href="" data-toggle="modal" data-target="#photo_modal"><img class="img-responsive" src="<?php echo $user->upload_directory.DS.$user->user_image;?>"></a>
                 </div>
 
 
@@ -98,7 +100,7 @@ if(isset($_POST['update'])) {
                             <input type="submit" value="Update the Motherfucker" name="update" class="btn btn-primary pull-right" >
                         </div>
                         <div class="form-group">
-                            <a href="delete_user.php?id=<?php echo $user->id;?>" class="btn btn-danger">Delete the Motherfucker</a>
+                            <a href="delete_user.php?id=<?php echo $user->id;?>" id="user_id" class="btn btn-danger">Delete the Motherfucker</a>
                         </div>
 
                     </div>
@@ -117,6 +119,8 @@ if(isset($_POST['update'])) {
     </div>
     <!-- /.container-fluid -->
 </div>
+
+
 <!-- /#page-wrapper -->
 
 <?php include("includes/footer.php"); ?>
