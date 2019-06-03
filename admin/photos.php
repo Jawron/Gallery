@@ -48,7 +48,7 @@ if(!$session->isSignedIn()) {
                             <td>
                                 <img class="admin-photo-thumbnail" src="<?php echo $photo->picturePath($data->filename); ?>">
                                 <div class="pictures_link">
-                                    <a href="delete_photo.php?id=<?php echo $data->id;?>">Delete</a>
+                                    <a href="delete_photo.php?id=<?php echo $data->id;?>" class="delete_link">Delete</a>
                                     <a href="edit_photo.php?id=<?php echo $data->id;?>">Edit</a>
                                     <a href="../photo.php?id=<?php echo $data->id;?>">View</a>
                                 </div>
